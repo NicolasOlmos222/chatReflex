@@ -1,42 +1,44 @@
-"""Welcome to Reflex! This file outlines the steps to create a basic app."""
 import reflex as rx
 from chatReflex import style
-from chatReflex.state import State
-
-def qa(question: str, answer: str) -> rx.Component:
-    return rx.box(
-        rx.box(
-            rx.text(question, style=style.question_style), text_align="right"),
-        rx.box(
-            rx.text(answer, style=style.answer_style), text_aling="right"),
-        margin_y="1em",
-    )
-
-def chat() -> rx.Component:
-    return rx.box(
-        rx.foreach(
-            State.chat_history,
-            lambda messages: qa(messages[0], messages[1]),
-        )
-    )
-
-def action_bar() -> rx.Component:
-    return rx.hstack(
-        rx.input(
-            placeholder="Ask a question",
-            on_blur=State.set_question,
-            style=style.input_style,
-        ),
-        rx.button(
-            "Ask",
-            on_click=State.answer,
-            style=style.button_style,
-        ),
-    )
 
 
 def index() -> rx.Component:
-    return rx.container(chat(), action_bar())
+    return rx.vstack(
+        rx.box(
+            rx.vstack(
+                rx.text(
+                    "MI EMPRENDIMIENTO",
+                    font_size="25px"
+                ),
+            ),
+            bg="lightgreen",
+            width="100%",
+        ),
+        rx.box(
+            rx.vstack(
+                rx.hstack(
+                    rx.button(
+                        "INICIO",
+                    ),
+                    rx.button(
+                        "CATALOGO",
+                    ),
+                    rx.button(
+                        "CONTACTO",
+                    ),
+                ),
+                rx.image(
+                    src="/banner.jpeg", width="500px", height="auto"
+                ),
+                bg="lightgreen",
+                padding="3px",
+                width="100%",
+            ),
+            bg="lightgreen",
+            width="100%",
+        ),
+        width="100%",
+    )
 
 
 # Add state and page to the app.
